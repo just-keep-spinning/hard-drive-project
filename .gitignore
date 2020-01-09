@@ -1,0 +1,9 @@
+__pycache__
+.ipynb_checkpoints
+env.py
+.DS_Store
+.vscode
+case.csv
+dept.csv
+source.csv
+AllCards.json
