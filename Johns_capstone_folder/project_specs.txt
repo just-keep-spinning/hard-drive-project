@@ -99,5 +99,29 @@ https://www.prosofteng.com/blog/how-long-do-hard-drives-last
 
 Annual failure rate
 
+Failure rate dramatically increases just before three years recommend using three years or just before as cutoff for early failures
 
+https://www.prosofteng.com/blog/how-long-do-hard-drives-last
+https://www.backblaze.com/blog/how-long-do-disk-drives-last/
+
+
+2013 Smart  1, 5, 9, 194, 197,
+
+SMART 1 Read Error Rate
+
+0 is good
+The raw value has different structure for different vendors
+
+All others are poor 
+S.M.A.R.T. parameter indicates the rate of hardware read errors that occurred when reading data from a disk surface. Any value differing from zero means there is a problem with the disk surface, read/write heads (including crack on a head, broken head, head contamination, head resonance, bad connection to electronics module, handling damage). The higher parameter’s value is, the more the hard disk failure is possible.
+
+SMART 5
+Core Stat
+
+SMART 9 Count of hours in power-on state (target variable)
+
+SMART 194
+
+
+SMART 197
 
