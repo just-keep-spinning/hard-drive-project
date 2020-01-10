@@ -24,3 +24,104 @@ print os.path.abspath("something.exe")
 
 Identify indicators of reliability (ave failure rate, power on hours)
 Use indicators to identify models with high and low reliability
+
+Yesterday 
+project planning as a group
+Set goals for project
+Determined goal for model:to predict early failures using black blaze data features as determined by hard drive hours 
+
+
+Resume blurb
+Determine what will be included in the mvp along with the model
+Explore date sound the most recent year decided among the four of us by quarter
+Work on preparation 
+Lookover smart atributes (core 5 + smart_9)
+Determine cutoffs for early failures
+
+
+SMART 5 – Reallocated_Sector_Count.
+
+Hd attempts to read/write/manage data in a sector and gets an error
+Data is then moved to another sector and old sector is no longer used for storage
+
+There is no fix
+
+0 is good anything else is bad higher numbers are worse
+=>1 indicates that the drive is dying
+May still run for years but risk of failure is high
+
+https://harddrivegeek.com/reallocated-sector-count/
+
+
+SMART 187 – Reported_Uncorrectable_Errors.
+
+errors that could not be recovered using hardware ECC (error-correcting code).
+
+0 is good anything else is bad high numbers are worse
+
+https://www.backblaze.com/blog/hard-drive-smart-stats/
+
+
+SMART 188 – Command_Timeout.
+
+parameter indicates a number of aborted operations due to hard disk timeout.
+
+This is a critical parameter. Degradation of this parameter may indicate serious problems with power supply or an oxidized data cable. Urgent data backup and hardware replacement is recommended.
+
+0 good 1+ very bad
+
+
+SMART 197 – Current_Pending_Sector_Count.
+
+0 good 1 bad can fluctuate
+
+Current Pending Sector Count S.M.A.R.T. parameter is a critical parameter and indicates the current count of unstable sectors (waiting for remapping). The raw value of this attribute indicates the total number of sectors waiting for remapping. Later, when some of these sectors are read successfully, the value is decreased. If errors still occur when reading some sector, the hard drive will try to restore the data, transfer it to the reserved disk area (spare area) and mark this sector as remapped.
+
+Please also consult your machines's or hard disks documentation.
+
+Recommendations
+This is a critical parameter. Degradation of this parameter may indicate imminent drive failure. Urgent data backup and hardware replacement is recommended.
+
+
+SMART 198 – Offline_Uncorrectable.
+
+0 good 1 very bad
+
+Uncorrectable Sector Count S.M.A.R.T. parameter is a critical parameter and indicates the quantity of uncorrectable errors. The raw value of this attribute indicates the total number of uncorrectable errors when reading/writing a sector.
+
+
+Lifespan of a hard drive
+3-5 
+https://www.prosofteng.com/blog/how-long-do-hard-drives-last
+
+
+
+
+Annual failure rate
+
+Failure rate dramatically increases just before three years recommend using three years or just before as cutoff for early failures
+
+https://www.prosofteng.com/blog/how-long-do-hard-drives-last
+https://www.backblaze.com/blog/how-long-do-disk-drives-last/
+
+
+2013 Smart  1, 5, 9, 194, 197,
+
+SMART 1 Read Error Rate
+
+0 is good
+The raw value has different structure for different vendors
+
+All others are poor 
+S.M.A.R.T. parameter indicates the rate of hardware read errors that occurred when reading data from a disk surface. Any value differing from zero means there is a problem with the disk surface, read/write heads (including crack on a head, broken head, head contamination, head resonance, bad connection to electronics module, handling damage). The higher parameter’s value is, the more the hard disk failure is possible.
+
+SMART 5
+Core Stat
+
+SMART 9 Count of hours in power-on state (target variable)
+
+SMART 194
+
+
+SMART 197
+
