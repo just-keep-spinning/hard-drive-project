@@ -6,4 +6,5 @@ env.py
 case.csv
 dept.csv
 source.csv
+*.csv
 AllCards.json

@@ -1,0 +1,26 @@
+Name: Predicting datacenter hard drive failures	
+Goal of the project: Classify which hard drives models have high or low reliability
+Deliverables: Slides, analysis notebook, and a clear recommendation on what to buy or avoid.
+Nice to haves: Analyze multiple quarters/years
+Data Source: https://www.backblaze.com/b2/hard-drive-test-data.html
+
+
+The first row of the each file contains the column names, the remaining rows are the actual data. The columns are as follows:
+
+Date – The date of the file in yyyy-mm-dd format.
+Serial Number – The manufacturer-assigned serial number of the drive.
+Model – The manufacturer-assigned model number of the drive.
+Capacity – The drive capacity in bytes.
+Failure – Contains a “0” if the drive is OK. Contains a “1” if this is the last day the drive was operational before failing.
+2013-2014 SMART Stats – 80 columns of data, that are the Raw and Normalized values for 40 different SMART stats as reported by the given drive. Each value is the number reported by the drive.
+2015-2017 SMART Stats – 90 columns of data, that are the Raw and Normalized values for 45 different SMART stats as reported by the given drive. Each value is the number reported by the drive.
+2018 (Q1) SMART Stats – 100 columns of data, that are the Raw and Normalized values for 50 different SMART stats as reported by the given drive. Each value is the number reported by the drive.
+2018 (Q2) SMART Stats – 104 columns of data, that are the Raw and Normalized values for 52 different SMART stats as reported by the given drive. Each value is the number reported by the drive.
+2018 (Q4) SMART Stats – 124 columns of data, that are the Raw and Normalized values for 62 different SMART stats as reported by the given drive. Each value is the number reported by the drive.
+
+import os
+print os.path.abspath("something.exe")
+
+
+Identify indicators of reliability (ave failure rate, power on hours)
+Use indicators to identify models with high and low reliability
