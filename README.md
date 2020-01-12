@@ -3,7 +3,7 @@
 
 Goal: Determine the reliability of hard drives by model. 
 
-Raw data was acquired from [BackBlaze.com]. (https://www.backblaze.com/b2/hard-drive-test-data.html#downloading-the-raw-hard-drive-test-data) The data was aggregated by serial number. The max values of the top five identified SMART attributes for hard drive failures were retrieved for each unique serial number. 
+Raw data was acquired from [BackBlaze.com](https://www.backblaze.com/b2/hard-drive-test-data.html#downloading-the-raw-hard-drive-test-data). The data was aggregated by serial number. The max values of the top five identified SMART attributes for hard drive failures were retrieved for each unique serial number. 
 
 The aggregated data can be accessed here by year as a csv: 
 - [2016](https://drive.google.com/file/d/1iMcvA_dCLtTKqTNk7IX3lJJdz9bakGw_/view?usp=sharing)
