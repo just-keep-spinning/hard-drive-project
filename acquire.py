@@ -11,15 +11,15 @@ spark = pyspark.sql.SparkSession.builder.getOrCreate()
 
 def aggegrate_data():
     # pull 2016, 2017, 2019 data
-    df_2016 = spark.read.csv('./data/data_Q*_2016/*.csv', header=True)
-    df_2017 = spark.read.csv('./data/data_Q*_2017/*.csv', header=True)
-    df_2019 = spark.read.csv('./data/data_Q*_2019/*.csv', header=True)
+    df_2016 = spark.read.csv('./data/data_Q*_2016/*.csv', header=True, inferSchema=True)
+    df_2017 = spark.read.csv('./data/data_Q*_2017/*.csv', header=True, inferSchema=True)
+    df_2019 = spark.read.csv('./data/data_Q*_2019/*.csv', header=True, inferSchema=True)
 
     # pull 2018 data by quarter, as they have different columns
-    df_2018_1 = spark.read.csv('./data/data_Q1_2018/*.csv', header=True)
-    df_2018_2 = spark.read.csv('./data/data_Q2_2018/*.csv', header=True)
-    df_2018_3 = spark.read.csv('./data/data_Q3_2018/*.csv', header=True)
-    df_2018_4 = spark.read.csv('./data/data_Q4_2018/*.csv', header=True)
+    df_2018_1 = spark.read.csv('./data/data_Q1_2018/*.csv', header=True, inferSchema=True)
+    df_2018_2 = spark.read.csv('./data/data_Q2_2018/*.csv', header=True, inferSchema=True)
+    df_2018_3 = spark.read.csv('./data/data_Q3_2018/*.csv', header=True, inferSchema=True)
+    df_2018_4 = spark.read.csv('./data/data_Q4_2018/*.csv', header=True, inferSchema=True)
 
     # find stats that aren't included in older years
     cols_2016 = df_2016.columns
@@ -40,8 +40,8 @@ def aggegrate_data():
 
 def extract_smart_5(df):
     df = df.groupby('serial_number', 'model', 'capacity_bytes'
-                   ).agg(max('failure'), max('smart_9_raw'), max('smart_5_raw'), 
-                        max('smart_187_raw') , max('smart_197_raw'), max('smart_198_raw')
+                   ).agg(max('failure'), max('smart_9_raw'), max('smart_5_raw'), max('smart_187_raw'), 
+                        max('smart_188_raw') , max('smart_197_raw'), max('smart_198_raw')
                         )
     return df
 
