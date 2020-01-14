@@ -11,9 +11,6 @@ def prepare(df):
     # Convert power hours to years
     df['max(smart_9_raw)'] = round((df['max(smart_9_raw)']/ 8760),1)
 
-    # Drop unnamed column
-    df.drop(columns=('Unnamed: 0'), inplace = True)
-
     # Create a new column for manufacturer
     df['manufacturer'] = df.model.apply(get_manufacturer)
     
