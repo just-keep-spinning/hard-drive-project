@@ -53,3 +53,16 @@ def get_manufacturer(model):
         return 'Samsung'
     else:
         return 'Unknown'
+
+def unique(df):
+    '''
+    Remove rows that duplicate serial numbers after aggregation.
+    '''
+    
+    # remove rows with 0 copacity_gigabytes they were creating duplicate rows for some of the serial numbers
+    df = df[df.capacity_gigabytes > 0]
+    
+    # remove rows by index that were creating duplicate serial numbers 
+    df = df.drop([68273,50408,37150,154660,162948,50816,156370,31687,20823,75191,132189,4177,78104,103620,141505,95249,26969])
+    
+    return df
