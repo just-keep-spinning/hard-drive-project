@@ -86,3 +86,5 @@ def old_or_fail(df):
     '''
 
     df = df[(df.failure==1)|(df.drive_age_in_years>1.6)]
+
+    return df
