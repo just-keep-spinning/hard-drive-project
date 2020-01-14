@@ -66,3 +66,12 @@ def unique(df):
     df = df.drop([68273,50408,37150,154660,162948,50816,156370,31687,20823,75191,132189,4177,78104,103620,141505,95249,26969])
     
     return df
+
+def treat_nulls(df):
+    # remove nulls from specific columns by imputing zeroes
+    df.reported_uncorrectable_errors = df.reported_uncorrectable_errors.fillna(value=0)
+    df.command_timeout = df.command_timeout.fillna(value=0)
+    
+    # treat remaining nulls by dropping specific rows
+    df = df.dropna(axis=0)
+    return df
