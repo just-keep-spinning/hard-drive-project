@@ -68,3 +68,14 @@ def get_manufacturer(model):
         return 'Samsung'
     else:
         return 'Unknown'
+
+
+
+def treat_nulls(df):
+    # remove nulls from specific columns by imputing zeroes
+    df.reported_uncorrectable_errors = df.reported_uncorrectable_errors.fillna(value=0)
+    df.command_timeout = df.command_timeout.fillna(value=0)
+    
+    # treat remaining nulls by dropping specific rows
+    df = df.dropna(axis=0)
+    return df
