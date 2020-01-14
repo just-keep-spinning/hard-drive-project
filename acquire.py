@@ -9,7 +9,7 @@ import os
 # create local spark enviroment
 spark = pyspark.sql.SparkSession.builder.getOrCreate()
 
-def aggegrate_data():
+def combine_data():
     # pull 2016, 2017, 2019 data
     df_2016 = spark.read.csv('./data/data_Q*_2016/*.csv', header=True, inferSchema=True)
     df_2017 = spark.read.csv('./data/data_Q*_2017/*.csv', header=True, inferSchema=True)
@@ -53,7 +53,7 @@ def acquire_agg_data():
         return pd.read_csv('hard_drives_smart_5.csv').drop('Unnamed: 0',axis=1)
     else:   
         # data aggegrated with top 5 smart stats
-        df = extract_smart_5(aggegrate_data())
+        df = extract_smart_5(combine_data())
 
         # convert to pandas
         df = df.select("*").toPandas()
