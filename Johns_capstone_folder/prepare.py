@@ -79,12 +79,3 @@ def treat_nulls(df):
     # treat remaining nulls by dropping specific rows
     df = df.dropna(axis=0)
     return df
-
-def old_or_fail(df,cut_off=1.6):
-    '''
-    Drops rows for drives that have not failed and are younger than the cut off age
-    '''
-
-    df = df[(df.failure==1)|(df.drive_age_in_years > cut_off)]
-
-    return df
