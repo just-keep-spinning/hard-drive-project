@@ -22,3 +22,9 @@ def get_quartile(df,Q1=1.6,Q2=2.6,Q3=4):
     df['quartile'][(df.drive_age_in_years>=Q3)] = 'Q4'
     
     return df
+
+def remove_manufacturers(df):
+    
+    # Remove manufactures with low value counts
+    df = df[(df.manufacturer != 'Samsung') & (df.manufacturer != 'Unknown')]
+    return df
