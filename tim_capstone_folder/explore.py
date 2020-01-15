@@ -23,4 +23,3 @@ def get_quartile(df,Q1=1.6,Q2=2.6,Q3=4):
     
     return df
 
-apsdoifjasiodfj
