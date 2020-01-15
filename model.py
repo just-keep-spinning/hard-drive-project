@@ -1,5 +1,5 @@
 from sklearn.model_selection import train_test_split
-import pandas as import pd
+import pandas as pd
 import numpy as np
 
 def split_my_data(df):
