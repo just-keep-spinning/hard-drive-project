@@ -6,10 +6,10 @@ import re
 def prepare(df):
     
     # Convert capacity column from bytes to gigabytes
-    df['capacity_bytes'] = round((df['capacity_bytes']/ 1_000_000_000),1)
+    df['capacity_bytes'] = round((df['capacity_bytes']/ 1_000_000_000),0)
 
     # Convert power hours to years
-    df['max(smart_9_raw)'] = round((df['max(smart_9_raw)']/ 8760),0)
+    df['max(smart_9_raw)'] = round((df['max(smart_9_raw)']/ 8760),1)
 
     # Create a new column for manufacturer
     df['manufacturer'] = df.model.apply(get_manufacturer)
