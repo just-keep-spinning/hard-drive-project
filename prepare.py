@@ -29,7 +29,7 @@ def get_manufacturer(model):
 def prepare(df):
     
     # Convert capacity column from bytes to gigabytes
-    df['capacity_bytes'] = round((df['capacity_bytes']/ 1_000_000_000),0)
+    df['capacity_bytes'] = round((df['capacity_bytes']/ 1_000_000_000_000),0)
 
     # Convert power hours to years
     df['max(smart_9_raw)'] = round((df['max(smart_9_raw)']/ 8760),1)
@@ -38,7 +38,7 @@ def prepare(df):
     df['manufacturer'] = df.model.apply(get_manufacturer)
     
     # Rename columns appropriately
-    df = df.rename(columns={'capacity_bytes':'capacity_gigabytes',
+    df = df.rename(columns={'capacity_bytes':'capacity_terabytes',
                         'max(failure)':'failure',
                         'max(smart_9_raw)':'drive_age_in_years',
                         'max(smart_5_raw)':'reallocated_sectors_count',
