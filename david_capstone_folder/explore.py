@@ -15,9 +15,6 @@ def early_failure(df,cut_off=1.6):
 
     '''
     df['early_failure'] = np.where((df.drive_age_in_years <= cut_off) & (df.failure == 1), 1, 0)
-    # df['early_failure']= 1
-    # df['early_failure'][df.drive_age_in_years<=cut_off] = 1
-    # df['early_failure'][df.drive_age_in_years>cut_off] = 0
     
     return df
 
@@ -28,6 +25,14 @@ def old_or_fail(df,cut_off=1.6):
 
     df = df[(df.failure==1)|(df.drive_age_in_years > cut_off)]
 
+    return df
+
+def make_binary_values(df):
+    df['smart_5_nonzero'] = np.where(df.reallocated_sectors_count > 0, '1','0').astype(int)
+    df['smart_187_nonzero'] = np.where(df.reported_uncorrectable_errors > 0, '1', '0').astype(int)
+    df['smart_188_nonzero'] = np.where(df.command_timeout > 0, '1', '0').astype(int)
+    df['smart_197_nonzero'] = np.where(df.current_pending_sector_count > 0, '1', '0').astype(int)
+    df['smart_198_nonzero'] = np.where(df.uncorrectable_sector_count > 0, '1', '0').astype(int)
     return df
 
 
