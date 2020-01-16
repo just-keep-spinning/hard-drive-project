@@ -15,9 +15,6 @@ def early_failure(df,cut_off=1.6):
 
     '''
     df['early_failure'] = np.where((df.drive_age_in_years <= cut_off) & (df.failure == 1), 1, 0)
-    # df['early_failure']= 1
-    # df['early_failure'][df.drive_age_in_years<=cut_off] = 1
-    # df['early_failure'][df.drive_age_in_years>cut_off] = 0
     
     return df
 
