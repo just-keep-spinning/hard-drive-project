@@ -3,6 +3,29 @@ import numpy as np
 import re 
 
 
+def get_manufacturer(model):
+    if model.startswith('ST'):
+        return 'Seagate'
+    elif model.startswith('Sea'):
+        return 'Seagate'
+    elif model.startswith('HGST'):
+        return 'Hitachi'
+    elif model.startswith('Hit'):
+        return 'Hitachi'
+    elif model.startswith('TOS'):
+        return 'Toshiba'
+    elif model.startswith('DEL'):
+        return 'Dell'
+    elif model.startswith('WD'):
+        return 'Western Digital'
+    elif model.startswith('Sam'):
+        return 'Samsung'
+    elif model.startswith('SAM'):
+        return 'Samsung'
+    else:
+        return 'Unknown'
+
+
 def prepare(df):
     
     # Convert capacity column from bytes to gigabytes
@@ -47,30 +70,6 @@ def unique(df):
     return df
 
 
-def get_manufacturer(model):
-    if model.startswith('ST'):
-        return 'Seagate'
-    elif model.startswith('Sea'):
-        return 'Seagate'
-    elif model.startswith('HGST'):
-        return 'Hitachi'
-    elif model.startswith('Hit'):
-        return 'Hitachi'
-    elif model.startswith('TOS'):
-        return 'Toshiba'
-    elif model.startswith('DEL'):
-        return 'Dell'
-    elif model.startswith('WD'):
-        return 'Western Digital'
-    elif model.startswith('Sam'):
-        return 'Samsung'
-    elif model.startswith('SAM'):
-        return 'Samsung'
-    else:
-        return 'Unknown'
-
-
-
 def treat_nulls(df):
     # remove nulls from specific columns by imputing zeroes
     df.reported_uncorrectable_errors = df.reported_uncorrectable_errors.fillna(value=0)
@@ -78,13 +77,4 @@ def treat_nulls(df):
     
     # treat remaining nulls by dropping specific rows
     df = df.dropna(axis=0)
-    return df
-
-def old_or_fail(df,cut_off=1.6):
-    '''
-    Drops rows for drives that have not failed and are younger than the cut off age
-    '''
-
-    df = df[(df.failure==1)|(df.drive_age_in_years > cut_off)]
-
     return df
