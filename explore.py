@@ -27,7 +27,7 @@ def old_or_fail(df,cut_off=1.6):
 
     return df
 
-def make_binary_values(df)
+def make_binary_values(df):
     df['smart_5_nonzero'] = np.where(df.reallocated_sectors_count > 0, '1','0').astype(int)
     df['smart_187_nonzero'] = np.where(df.reported_uncorrectable_errors > 0, '1', '0').astype(int)
     df['smart_188_nonzero'] = np.where(df.command_timeout > 0, '1', '0').astype(int)
