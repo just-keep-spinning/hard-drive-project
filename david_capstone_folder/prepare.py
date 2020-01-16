@@ -29,7 +29,7 @@ def get_manufacturer(model):
 def prepare(df):
     
     # Convert capacity column from bytes to terabytes
-    df['capacity_bytes'] = round((df['capacity_bytes']/ 1_000_000_000_000),0)
+    df['capacity_bytes'] = round((df['capacity_bytes']/ 1_000_000_000_000),1)
 
     # Convert power hours to years
     df['max(smart_9_raw)'] = round((df['max(smart_9_raw)']/ 8760),1)
