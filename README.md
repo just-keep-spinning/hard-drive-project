@@ -1,6 +1,8 @@
 ## Hard Drive Project
 #### Sagacious Analytics
 
+Project Slides Link: https://docs.google.com/presentation/d/1ZMemmkrWH7btd8O_HNecTcAQqY0VErzuTPsXkBwOdNA/edit#slide=id.g35f391192_00
+
 Goal: Determine the reliability of hard drives by model. 
 
 Raw data from 2016 to 2019 was acquired from [BackBlaze.com](https://www.backblaze.com/b2/hard-drive-test-data.html#downloading-the-raw-hard-drive-test-data). The data was aggregated by serial number. The max values of the top five identified SMART stats for hard drive failures were retrieved for each unique serial number. 
