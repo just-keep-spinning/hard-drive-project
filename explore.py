@@ -1,6 +1,8 @@
 import pandas as pd 
 import numpy as np 
 
+from scipy import stats
+
 
 def remove_manufacturers(df):
     
@@ -48,3 +50,23 @@ def get_quartile(df,Q1=1.6,Q2=2.6,Q3=4):
     df['quartile'][(df.drive_age_in_years>=Q3)] = 'Q4'
     
     return df
+
+def chi2_models(df):
+    stats_list = [] # empty list for stats
+
+    for mode in df.model.unique():
+        # create a for each model vs all other models
+        observed = pd.crosstab(df.model == mode, df.early_failure)
+
+        # run chi2 test
+        chi2, p, degf, expected = stats.chi2_contingency(observed)
+
+        # format variables and define significance 
+        chi2 = round(chi2,4)
+        p = round(p,4)
+        signif = p < 0.05
+
+        # append every model's values to list
+        stats_list.append([mode, chi2, p, signif])
+
+    return pd.DataFrame(stats_list, columns=['model','chi2', 'p', 'signif'])
