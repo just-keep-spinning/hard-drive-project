@@ -45,19 +45,35 @@ def extract_smart_5(df):
                         )
     return df
 
+def extract_smart_all(df):
+    df = df.groupby('serial_number', 'model', 'capacity_bytes').max()
+    return df
+
 
 def acquire_agg_data():
     filename = "hard_drives_smart_5.csv"
 
     if os.path.exists(filename):
-        return pd.read_csv('hard_drives_smart_5.csv').drop('Unnamed: 0',axis=1)
+        return pd.read_csv(filename).drop('Unnamed: 0',axis=1)
     else:   
         # data aggegrated with top 5 smart stats
         df = extract_smart_5(combine_data())
-
         # convert to pandas
         df = df.select("*").toPandas()
+        # save as csv
+        df.to_csv(filename)
+        return df
 
+def acquire_agg_data_all():
+    filename = "hard_drives_smart_all.csv"
+
+    if os.path.exists(filename):
+        return pd.read_csv(filename).drop('Unnamed: 0',axis=1)
+    else:   
+        # data aggegrated with top 5 smart stats
+        df = extract_smart_all(combine_data())
+        # convert to pandas
+        df = df.select("*").toPandas()
         # save as csv
         df.to_csv(filename)
         return df
