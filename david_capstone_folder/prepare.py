@@ -27,7 +27,9 @@ def get_manufacturer(model):
 
 
 def prepare(df):
-    
+    # Drop unnamed column
+    df = df.drop(columns=('Unnamed: 0'))
+
     # Convert capacity column from bytes to terabytes
     df['capacity_bytes'] = round((df['capacity_bytes']/ 1_000_000_000_000),1)
 
@@ -40,6 +42,8 @@ def prepare(df):
     # Rename columns appropriately
     df = df.rename(columns={'capacity_bytes':'capacity_terabytes',
                         'max(failure)':'failure',
+                        'max(smart_1_raw)' :'read_error_rate'
+                        'max(smart_1_raw)' : ''
                         'max(smart_9_raw)':'drive_age_in_years',
                         'max(smart_5_raw)':'reallocated_sectors_count',
                         'max(smart_187_raw)':'reported_uncorrectable_errors',
@@ -48,10 +52,11 @@ def prepare(df):
                         'max(smart_198_raw)':'uncorrectable_sector_count'})
 
     # Reorder columns 
-    df = df[['serial_number','manufacturer','model','capacity_terabytes',
+    '''df = df[['serial_number','manufacturer','model','capacity_terabytes',
           'failure','drive_age_in_years','reallocated_sectors_count',
          'reported_uncorrectable_errors','command_timeout',
           'current_pending_sector_count','uncorrectable_sector_count']]
+          '''
     
     return df
 
