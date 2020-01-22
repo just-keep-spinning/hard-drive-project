@@ -7,7 +7,7 @@ from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 
 def split_my_data(df):
     # define target and features
-    X = df.drop(columns = ['early_failure', 'failure'])
+    X = df.drop(columns = ['early_failure', 'failure', 'drive_age_in_years'])
     y = df[['early_failure']]
 
     # split into train and test
@@ -36,11 +36,14 @@ def encode_hot(train, test, col_name):
     # Turn the array of new values into a data frame with columns names being the values
     # and index matching that of train/test
     # then merge the new dataframe with the existing train/test dataframe
+    # and drop original column
     train_encoded = pd.DataFrame(data=train_ohe, columns=encoded_values, index=train.index)
     train = train.join(train_encoded)
+    train = train.drop(columns = col_name)
 
     test_encoded = pd.DataFrame(data=test_ohe, columns=encoded_values, index=test.index)
     test = test.join(test_encoded)
+    test = test.drop(columns = col_name)
 
     return train, test
 

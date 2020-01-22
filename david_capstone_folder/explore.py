@@ -28,11 +28,11 @@ def old_or_fail(df,cut_off=1.6):
     return df
 
 def make_binary_values(df):
-    df['smart_5_nonzero'] = np.where(df.reallocated_sectors_count > 0, '1','0').astype(int)
-    df['smart_187_nonzero'] = np.where(df.reported_uncorrectable_errors > 0, '1', '0').astype(int)
-    df['smart_188_nonzero'] = np.where(df.command_timeout > 0, '1', '0').astype(int)
-    df['smart_197_nonzero'] = np.where(df.current_pending_sector_count > 0, '1', '0').astype(int)
-    df['smart_198_nonzero'] = np.where(df.uncorrectable_sector_count > 0, '1', '0').astype(int)
+    df.reallocated_sectors_count = np.where(df.reallocated_sectors_count > 0, '1','0').astype(bool)
+    df.reported_uncorrectable_errors = np.where(df.reported_uncorrectable_errors > 0, '1', '0').astype(bool)
+    df.command_timeout = np.where(df.command_timeout > 0, '1', '0').astype(bool)
+    df.current_pending_sector_count = np.where(df.current_pending_sector_count > 0, '1', '0').astype(bool)
+    df.uncorrectable_sector_count = np.where(df.uncorrectable_sector_count > 0, '1', '0').astype(bool)
     return df
 
 
