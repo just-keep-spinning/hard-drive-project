@@ -1,6 +1,10 @@
 import pandas as pd 
 import numpy as np 
 
+import matplotlib.pyplot as plt
+import matplotlib
+import seaborn as sns
+
 from scipy import stats
 
 
@@ -70,3 +74,22 @@ def chi2_models(df):
         stats_list.append([mode, chi2, p, signif])
 
     return pd.DataFrame(stats_list, columns=['model','chi2', 'p', 'signif'])
+    
+
+def get_manufacturer_graph(df):
+
+    df = df[['model','manufacturer','drive_age_in_years']]
+
+    df = df.groupby('model').agg({'manufacturer': 'max','drive_age_in_years':'median'})
+
+    df = get_quartile(df)
+
+    df = df.drop(columns=['drive_age_in_years'])
+    df = df.reset_index()
+
+    df['count']= 1
+
+    df = df.groupby(['manufacturer','quartile']).count().reset_index()
+
+    sns.barplot(x='manufacturer', y='count', hue='quartile', data=df, palette='Blues')
+    plt.title("Model Reliability by Manufacturer ")

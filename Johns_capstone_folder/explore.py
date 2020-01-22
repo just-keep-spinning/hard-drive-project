@@ -1,5 +1,8 @@
 import pandas as pd 
 import numpy as np 
+import matplotlib.pyplot as plt
+import matplotlib
+import seaborn as sns
 
 
 def remove_manufacturers(df):
@@ -48,3 +51,21 @@ def get_quartile(df,Q1=1.6,Q2=2.6,Q3=4):
     df['quartile'][(df.drive_age_in_years>=Q3)] = 'Q4'
     
     return df
+
+def get_manufacturer_graph(df):
+
+    df = df[['model','manufacturer','drive_age_in_years']]
+
+    df = df.groupby('model').agg({'manufacturer': 'max','drive_age_in_years':'median'})
+
+    df = get_quartile(df)
+
+    df = df.drop(columns=['drive_age_in_years'])
+    df = df.reset_index()
+
+    df['count']= 1
+
+    df = df.groupby(['manufacturer','quartile']).count().reset_index()
+
+    sns.barplot(x='manufacturer', y='count', hue='quartile', data=df, palette='Blues')
+    plt.title("Model Reliability by Manufacturer ")
