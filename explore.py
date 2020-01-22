@@ -11,7 +11,7 @@ def remove_manufacturers(df):
     return df
 
 
-def early_failure(df,cut_off=1.6):
+def early_failure(df,cut_off=2.6):
     '''
     Add column to identify early failures based on the age of the hard drive 
 
@@ -20,7 +20,7 @@ def early_failure(df,cut_off=1.6):
     
     return df
 
-def old_or_fail(df,cut_off=1.6):
+def old_or_fail(df,cut_off=2.6):
     '''
     Retain rows for drives that have failed or are older than the cut off age
     '''
