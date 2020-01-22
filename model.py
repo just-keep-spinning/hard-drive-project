@@ -1,5 +1,9 @@
 import pandas as pd
 import numpy as np
+from sklearn.svm import SVC
+from sklearn.metrics import classification_report, confusion_matrix
+
+
 
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder
@@ -7,7 +11,7 @@ from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 
 def split_my_data(df):
     # define target and features
-    X = df.drop(columns = ['early_failure', 'failure', 'drive_age_in_years'])
+    X = df.drop(columns = ['model', 'serial_number', 'early_failure', 'failure', 'drive_age_in_years'])
     y = df[['early_failure']]
 
     # split into train and test
@@ -47,3 +51,14 @@ def encode_hot(train, test, col_name):
 
     return train, test
 
+
+def svc_modeling_function(X_train, y_train):    
+    weights = {0: 1, 1: 75}
+    svclassifier = SVC(kernel='sigmoid', probability = True, gamma = 10, C = 10, class_weight = weights)
+    svclassifier.fit(X_train, y_train)
+
+    y_pred = svclassifier.predict(X_train)
+    print(confusion_matrix(y_train,y_pred))
+    print(classification_report(y_train,y_pred))
+
+    return 
