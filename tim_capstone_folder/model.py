@@ -7,7 +7,7 @@ from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 
 def split_my_data(df):
     # define target and features
-    X = df.drop(columns = ['early_failure', 'failure'])
+    X = df.drop(columns = ['model', 'serial_number', 'early_failure', 'failure'])
     y = df[['early_failure']]
 
     # split into train and test
