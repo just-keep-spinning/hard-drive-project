@@ -7,8 +7,9 @@ from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 
 def split_my_data(df):
     # define target and features
-    X = df.drop(columns = ['early_failure', 'failure', 'drive_age_in_years', 'serial_number'])
     y = df[['early_failure']]
+    X = df.drop(columns = ['early_failure', 'failure', 'drive_age_in_years'])
+    
 
     # split into train and test
     X_train, X_test, y_train, y_test = train_test_split(X, y, train_size = .80, random_state = 123, stratify=df.early_failure)

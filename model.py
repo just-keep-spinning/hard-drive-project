@@ -2,6 +2,8 @@ import pandas as pd
 import numpy as np
 from sklearn.svm import SVC
 from sklearn.metrics import classification_report, confusion_matrix
+from sklearn.tree import DecisionTreeClassifier
+from sklearn import tree
 
 
 
@@ -62,3 +64,45 @@ def svc_modeling_function(X_train, y_train):
     print(classification_report(y_train,y_pred))
 
     return 
+
+
+def get_decision_tree(X_train,y_train,X_test,y_test):
+    '''
+    Prints stats for decision tree model
+    '''
+    
+    # Create decision tree object
+    clf = DecisionTreeClassifier(class_weight='balanced', criterion='entropy', max_depth=6,
+                                 max_features=None, max_leaf_nodes=None,
+                                 min_impurity_decrease=0.0, min_impurity_split=None,
+                                 min_samples_leaf=1, min_samples_split=2,
+                                 min_weight_fraction_leaf=0.0, presort=False, random_state=123,
+                                 splitter='best')
+    
+    # Fit data to classifier 
+    clf = clf.fit(X_train, y_train)
+
+    # Make predictions
+    y_pred = clf.predict(X_train)
+
+    # Get probabilities 
+    y_pred_proba = clf.predict_proba(X_train)
+  
+    # Print accuracy
+    print('Accuracy of Decision Tree classifier on training set: {:.2f}'
+    .format(clf.score(X_train, y_train)))
+    
+    # Get labels
+    labels = sorted(y_train.early_failure.unique())
+
+    print('')
+    
+    # Print confusion matrix
+    print("Confusion Matrix:")
+    print(pd.DataFrame(confusion_matrix(y_train, y_pred), index=labels, columns=labels))
+    
+    print('')
+    
+    # Print classification report
+    print("Classification Report:")
+    print(classification_report(y_train, y_pred))
