@@ -58,8 +58,7 @@ def encode_hot(train, test, col_name):
 
 def svc_modeling_function(X_train, y_train):    
     #create object and fit
-    weights = {0: 1, 1: 75}
-    svclassifier = SVC(kernel='sigmoid', probability = True, gamma = 10, C = 10, class_weight = weights, random_state=123)
+    svclassifier = SVC(kernel='rbf', probability = True, C = 100, random_state=123)
     svclassifier.fit(X_train, y_train)
 
     #predict 
