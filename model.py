@@ -110,7 +110,7 @@ def knn_modeling_function(X_train, y_train, X_test):
     y_pred=knn.predict(X_train)
 
     #predict on test
-    y_pred_test = svclassifier.predict(X_test)
+    y_pred_test = knn.predict(X_test)
     
     return y_pred, y_pred_test
 
