@@ -77,7 +77,11 @@ def chi2_models(df):
     
 
 def get_manufacturer_graph(df):
+    '''
+    creates a graph of model reliability by manufacturer
+    '''
 
+    # configure data frame
     df = df[['model','manufacturer','drive_age_in_years']]
 
     df = df.groupby('model').agg({'manufacturer': 'max','drive_age_in_years':'median'})
@@ -90,6 +94,20 @@ def get_manufacturer_graph(df):
     df['count']= 1
 
     df = df.groupby(['manufacturer','quartile']).count().reset_index()
-
-    sns.barplot(x='manufacturer', y='count', hue='quartile', data=df, palette='Blues')
-    plt.title("Model Reliability by Manufacturer ")
+    
+    
+    # create graph
+    plt.figure(figsize=(10,8))
+    
+    labels =['Very Unreliable','Unreliable','Reliable','Very Reliable']
+    
+    ax = sns.barplot(x='manufacturer', y='count', hue='quartile', data=df, palette=['Red','Orange','Yellow','Green'])
+    
+    h, l = ax.get_legend_handles_labels()
+    
+    ax.legend(h, labels, title="Model Reliability")
+    
+    plt.title("Model Reliability by Manufacturer")
+    
+    plt.show()
+    
