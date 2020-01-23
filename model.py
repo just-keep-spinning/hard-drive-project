@@ -56,57 +56,66 @@ def encode_hot(train, test, col_name):
     return train, test
 
 
-def svc_modeling_function(X_train, y_train):    
+def svc_modeling_function(X_train, y_train, X_test):    
     #create object and fit
     svclassifier = SVC(kernel='rbf', probability = True, C = 100, random_state=123)
     svclassifier.fit(X_train, y_train)
 
-    #predict 
+    #predict on train
     y_pred = svclassifier.predict(X_train)
     y_pred_proba = svclassifier.predict_proba(X_train)
-    print(confusion_matrix(y_train,y_pred))
-    print(classification_report(y_train,y_pred))
+
+    #predict on test
+    y_pred_test = svclassifier.predict(X_test)
+    
+    return y_pred, y_pred_test
 
 
-def dt_modeling_function(X_train,y_train):
-    # Create decision tree object & fit 
+def dt_modeling_function(X_train, y_train, X_test):
+    #create object and fit 
     clf = DecisionTreeClassifier(class_weight='balanced', criterion='entropy', max_depth=6, max_features=None, max_leaf_nodes=None, min_impurity_decrease=0.0, min_impurity_split=None, min_samples_leaf=1, min_samples_split=2, min_weight_fraction_leaf=0.0, presort=False, random_state=123, splitter='best')
     clf = clf.fit(X_train, y_train)
 
-    #predict
+    #predict on train
     y_pred = clf.predict(X_train)
     y_pred_proba = clf.predict_proba(X_train)
 
-    #evaluate 
-    print(confusion_matrix(y_train, y_pred))
-    print()
-    print(classification_report(y_train, y_pred))
+    #predict on test
+    y_pred_test = clf.predict(X_test)
+    
+    return y_pred, y_pred_test
   
  
-def logit_modeling_function(X_train, y_train):
+def logit_modeling_function(X_train, y_train, X_test):
     #create object and fit
     logit = LogisticRegression(solver = 'liblinear', class_weight='balanced', random_state = 123)
     logit.fit(X_train, y_train)
     
-    #predict
+    #predict on train
     y_pred = logit.predict(X_train)
     y_pred_proba = logit.predict_proba(X_train)
+
+    #predict on test
+    y_pred_test = logit.predict(X_test)
     
-    #evaluate
-    print(confusion_matrix(y_train, y_pred))
-    print()
-    print(classification_report(y_train, y_pred))
+    return y_pred, y_pred_test
 
 
-def knn_modeling_function(X_train, y_train):
+def knn_modeling_function(X_train, y_train, X_test):
     #create object and fit
     knn = KNeighborsClassifier(n_neighbors=3, weights = 'distance')
     knn.fit(X_train, y_train)
 
-    #predict
+    #predict on train
     y_pred=knn.predict(X_train)
 
-    #evaluate
-    print(confusion_matrix(y_train, y_pred))
+    #predict on test
+    y_pred_test = svclassifier.predict(X_test)
+    
+    return y_pred, y_pred_test
+
+
+def evaluate(y, y_pred):
+    print(confusion_matrix(y, y_pred))
     print()
-    print(classification_report(y_train, y_pred))
+    print(classification_report(y, y_pred))
