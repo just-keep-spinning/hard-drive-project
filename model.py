@@ -8,8 +8,8 @@ from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 
 # model and evaluate
 from sklearn.svm import SVC
-from sklearn import tree
 from sklearn.tree import DecisionTreeClassifier
+from sklearn.linear_model import LogisticRegression
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import classification_report, confusion_matrix
 
