@@ -1,14 +1,17 @@
+# data wrangling
 import pandas as pd
 import numpy as np
-from sklearn.svm import SVC
-from sklearn.metrics import classification_report, confusion_matrix
-from sklearn.tree import DecisionTreeClassifier
-from sklearn import tree
 
-
-
+# model preprocessing
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder
+
+# model and evaluate
+from sklearn.svm import SVC
+from sklearn import tree
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import classification_report, confusion_matrix
 
 
 def split_my_data(df):
@@ -19,7 +22,6 @@ def split_my_data(df):
     # split into train and test
     X_train, X_test, y_train, y_test = train_test_split(X, y, train_size = .80, random_state = 123, stratify=df.early_failure)
     return X_train, X_test, y_train, y_test
-
 
 
 def encode_hot(train, test, col_name):
@@ -55,54 +57,57 @@ def encode_hot(train, test, col_name):
 
 
 def svc_modeling_function(X_train, y_train):    
+    #create object and fit
     weights = {0: 1, 1: 75}
-    svclassifier = SVC(kernel='sigmoid', probability = True, gamma = 10, C = 10, class_weight = weights)
+    svclassifier = SVC(kernel='sigmoid', probability = True, gamma = 10, C = 10, class_weight = weights, random_state=123)
     svclassifier.fit(X_train, y_train)
 
+    #predict 
     y_pred = svclassifier.predict(X_train)
+    y_pred_proba = svclassifier.predict_proba(X_train)
     print(confusion_matrix(y_train,y_pred))
     print(classification_report(y_train,y_pred))
 
-    return 
 
-
-def get_decision_tree(X_train,y_train,X_test,y_test):
-    '''
-    Prints stats for decision tree model
-    '''
-    
-    # Create decision tree object
-    clf = DecisionTreeClassifier(class_weight='balanced', criterion='entropy', max_depth=6,
-                                 max_features=None, max_leaf_nodes=None,
-                                 min_impurity_decrease=0.0, min_impurity_split=None,
-                                 min_samples_leaf=1, min_samples_split=2,
-                                 min_weight_fraction_leaf=0.0, presort=False, random_state=123,
-                                 splitter='best')
-    
-    # Fit data to classifier 
+def dt_modeling_function(X_train,y_train):
+    # Create decision tree object & fit 
+    clf = DecisionTreeClassifier(class_weight='balanced', criterion='entropy', max_depth=6, max_features=None, max_leaf_nodes=None, min_impurity_decrease=0.0, min_impurity_split=None, min_samples_leaf=1, min_samples_split=2, min_weight_fraction_leaf=0.0, presort=False, random_state=123, splitter='best')
     clf = clf.fit(X_train, y_train)
 
-    # Make predictions
+    #predict
     y_pred = clf.predict(X_train)
-
-    # Get probabilities 
     y_pred_proba = clf.predict_proba(X_train)
-  
-    # Print accuracy
-    print('Accuracy of Decision Tree classifier on training set: {:.2f}'
-    .format(clf.score(X_train, y_train)))
-    
-    # Get labels
-    labels = sorted(y_train.early_failure.unique())
 
-    print('')
+    #evaluate 
+    print(confusion_matrix(y_train, y_pred))
+    print()
+    print(classification_report(y_train, y_pred))
+  
+ 
+def logit_modeling_function(X_train, y_train):
+    #create object and fit
+    logit = LogisticRegression(solver = 'liblinear', class_weight='balanced', random_state = 123)
+    logit.fit(X_train, y_train)
     
-    # Print confusion matrix
-    print("Confusion Matrix:")
-    print(pd.DataFrame(confusion_matrix(y_train, y_pred), index=labels, columns=labels))
+    #predict
+    y_pred = logit.predict(X_train)
+    y_pred_proba = logit.predict_proba(X_train)
     
-    print('')
-    
-    # Print classification report
-    print("Classification Report:")
+    #evaluate
+    print(confusion_matrix(y_train, y_pred))
+    print()
+    print(classification_report(y_train, y_pred))
+
+
+def knn_modeling_function(X_train, y_train):
+    #create object and fit
+    knn = KNeighborsClassifier(n_neighbors=3, weights = 'distance')
+    knn.fit(X_train, y_train)
+
+    #predict
+    y_pred=knn.predict(X_train)
+
+    #evaluate
+    print(confusion_matrix(y_train, y_pred))
+    print()
     print(classification_report(y_train, y_pred))
