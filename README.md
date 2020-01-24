@@ -3,7 +3,7 @@
 
 
 ### Goal: 
-The goal of this project is to determine the reliability of hard drives by models.Our target audience includes users of specific hard drive models in our dataset, as well as consumers in the market for a new hard drive. Our project deliverables include a jupyter notebook detailing our process, and a slide show presentation summarizing our findings.  
+The goal of this project is to determine the reliability of hard drive models, and to create a model that predicts whether or not a hard drive will fail.  Our target audience includes users of specific hard drive models in our dataset, as well as consumers in the market for a new hard drive. Our project deliverables include a jupyter notebook detailing our process, a handout ranking the hard drive models by reliability, and a slide show presentation summarizing our findings.  
 
 ### Background:
 #### The data:
