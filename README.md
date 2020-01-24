@@ -21,7 +21,7 @@ Access the aggegrated data:
 Document containg common terminology used throughout the project, definitions, and notes: [Data dictionary link](https://github.com/sagacious-analytics/hard-drive-project/blob/master/data_dictionary.md)
 
 #### SMART Attribute Index:
-Index containing SMART ID number, Attribute Name, and Description :[SMART Attribute Index](https://github.com/sagacious-analytics/hard-drive-project/blob/master/smart_attributes_index.md).
+Index containing SMART ID number, Attribute Name, and Description : [SMART Attribute Index](https://github.com/sagacious-analytics/hard-drive-project/blob/master/smart_attributes_index.md)
 
 ### Summary Presentation:
 
