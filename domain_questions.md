@@ -1,14 +1,20 @@
 ## What is a hard drive?
 
-a high-capacity, self-contained storage device containing a read-write mechanism plus one or more hard disks, inside a sealed unit
+A high-capacity, self-contained storage device containing a read-write mechanism plus one or more hard disks, inside a sealed unit
 
 ## What are the 5 key SMART stats for identifying Hard Drive failures?
 
-1.) SMART 5 – Reallocated_Sector_Count.
-2.) SMART 187 – Reported_Uncorrectable_Errors.
-3.) SMART 188 – Command_Timeout.
-4.) SMART 197 – Current_Pending_Sector_Count.
-5.) SMART 198 – Offline_Uncorrectable.
+S.M.A.R.T. (Self-Monitoring, Analysis and Reporting Technology; often written as SMART)
+
+1.) SMART 5 – Reallocated_Sector_Count
+
+2.) SMART 187 – Reported_Uncorrectable_Errors
+
+3.) SMART 188 – Command_Timeout
+
+4.) SMART 197 – Current_Pending_Sector_Count
+
+5.) SMART 198 – Offline_Uncorrectable
 
 
 ## How should we aggregate stats for those features?
