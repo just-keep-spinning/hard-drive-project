@@ -1,9 +1,9 @@
 ## Hard Drive Project
-#### Sagacious Analytics
+#### Just Keep Spinning
 
 
 ### Goal: 
-The goal of this project is to determine the reliability of hard drive models, and to create a model that predicts whether or not a hard drive will fail.  Our target audience includes users of specific hard drive models in our dataset, as well as consumers in the market for a new hard drive. Our project deliverables include a jupyter notebook detailing our process, a handout ranking the hard drive models by reliability, and a slide show presentation summarizing our findings.  
+The goal of this project is to determine the reliability of hard drive models and create a model that predicts whether or not a hard drive will fail early.  Our target audience includes users of the specific hard drive models in our dataset as well as consumers in the market for a new hard drive. Our project deliverables include a jupyter notebook detailing our process, a handout ranking hard drive models by highest and lowest reliability, and a slide show presentation summarizing our findings.  
 
 ### Background:
 #### The data:
@@ -13,13 +13,18 @@ Access the aggegrated data:
 - [top 5 SMART stats](https://drive.google.com/file/d/1bOE9kGx77GDPMs97Fl0n_3ZYbGxciQz5/view?usp=sharing)
 
 #### Hypotheses:
+- The 5 SMART (Self-Monitoring, Analysis and Reporting Technology) stats identified by Backblaze will indicate device hard drive failure
+- Hard drive fail rates will vary by model
+- Hard drives fail rates will vary by manufacturer
 
 #### Data dictionary:
+- [Data dictionary link](https://github.com/sagacious-analytics/hard-drive-project/blob/master/data_dictionary.md)
 
 #### SMART Attribute Index:
 
+- [SMART Attribute Index](https://github.com/sagacious-analytics/hard-drive-project/blob/master/smart_attributes_index.md)
 
-### Summary:
+### Summary Presentation:
 
 Project Slides Link: https://docs.google.com/presentation/d/1ZMemmkrWH7btd8O_HNecTcAQqY0VErzuTPsXkBwOdNA/edit#slide=id.g35f391192_00
 
