@@ -1,6 +1,12 @@
 import pandas as pd 
 import numpy as np 
 
+import matplotlib.pyplot as plt
+import matplotlib
+import seaborn as sns
+
+from scipy import stats
+
 
 def remove_manufacturers(df):
     
@@ -9,7 +15,7 @@ def remove_manufacturers(df):
     return df
 
 
-def early_failure(df,cut_off=1.6):
+def early_failure(df,cut_off=2.6):
     '''
     Add column to identify early failures based on the age of the hard drive 
 
@@ -18,7 +24,7 @@ def early_failure(df,cut_off=1.6):
     
     return df
 
-def old_or_fail(df,cut_off=1.6):
+def old_or_fail(df,cut_off=2.6):
     '''
     Retain rows for drives that have failed or are older than the cut off age
     '''
@@ -48,3 +54,60 @@ def get_quartile(df,Q1=1.6,Q2=2.6,Q3=4):
     df['quartile'][(df.drive_age_in_years>=Q3)] = 'Q4'
     
     return df
+
+def chi2_models(df):
+    stats_list = [] # empty list for stats
+
+    for mode in df.model.unique():
+        # create a for each model vs all other models
+        observed = pd.crosstab(df.model == mode, df.early_failure)
+
+        # run chi2 test
+        chi2, p, degf, expected = stats.chi2_contingency(observed)
+
+        # format variables and define significance 
+        chi2 = round(chi2,4)
+        p = round(p,4)
+        signif = p < 0.05
+
+        # append every model's values to list
+        stats_list.append([mode, chi2, p, signif])
+
+    return pd.DataFrame(stats_list, columns=['model','chi2', 'p', 'signif'])
+    
+
+def get_manufacturer_graph(df):
+    '''
+    creates a graph of model reliability by manufacturer
+    '''
+
+    # configure data frame
+    df = df[['model','manufacturer','drive_age_in_years']]
+
+    df = df.groupby('model').agg({'manufacturer': 'max','drive_age_in_years':'median'})
+
+    df = get_quartile(df)
+
+    df = df.drop(columns=['drive_age_in_years'])
+    df = df.reset_index()
+
+    df['count']= 1
+
+    df = df.groupby(['manufacturer','quartile']).count().reset_index()
+    
+    
+    # create graph
+    plt.figure(figsize=(10,8))
+    
+    labels =['Very Unreliable','Unreliable','Reliable','Very Reliable']
+    
+    ax = sns.barplot(x='manufacturer', y='count', hue='quartile', data=df, palette=['Red','Orange','Yellow','Green'])
+    
+    h, l = ax.get_legend_handles_labels()
+    
+    ax.legend(h, labels, title="Model Reliability")
+    
+    plt.title("Model Reliability by Manufacturer")
+    
+    plt.show()
+    
