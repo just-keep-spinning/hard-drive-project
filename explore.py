@@ -111,3 +111,29 @@ def get_manufacturer_graph(df):
     
     plt.show()
     
+
+def model_scores(df):
+    # add quartile to df
+    df = get_quartile(df)
+    
+    scores = [] #empty list
+
+    for mode in df.model.unique():
+        subset = df [df.model == mode]
+
+        # calculate percentage of of fail and non failure in each quartile
+        q1_NF_rate = ((subset.failure == 0) & (subset.quartile == 'Q1')).sum() / len(subset) * 0
+        q2_NF_rate = ((subset.failure == 0) & (subset.quartile == 'Q2')).sum() / len(subset) * 1
+        q3_NF_rate = ((subset.failure == 0) & (subset.quartile == 'Q3')).sum() / len(subset) * 1
+        q4_NF_rate = ((subset.failure == 0) & (subset.quartile == 'Q4')).sum() / len(subset) * 1.5
+
+        q1_F_rate = ((subset.failure == 1) & (subset.quartile == 'Q1')).sum() / len(subset) * -4
+        q2_F_rate = ((subset.failure == 1) & (subset.quartile == 'Q2')).sum() / len(subset) * -2 
+        q3_F_rate = ((subset.failure == 1) & (subset.quartile == 'Q3')).sum() / len(subset) * -1
+        q4_F_rate = ((subset.failure == 1) & (subset.quartile == 'Q4')).sum() / len(subset) * 1
+
+        scores.append([mode, q1_NF_rate + q2_NF_rate + q3_NF_rate + q4_NF_rate + q1_F_rate + q2_F_rate + q3_F_rate + q4_F_rate])
+        
+    df.drop(columns='quartile',inplace=True)
+    
+    return pd.DataFrame(scores, columns=['model', 'score']) #return dataframe
